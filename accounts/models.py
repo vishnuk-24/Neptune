@@ -88,15 +88,6 @@ COURSE_TYPE_CHOICES = (
 class User(AbstractUser):
     """Create users using AbstractUser."""
 
-    MALE = 'male'
-    FEMALE = 'female'
-    NOT_SPECIFIED = 'not specified'
-    GENDER_CHOICES = (
-        (MALE, 'Male'),
-        (FEMALE, 'Female'),
-        (NOT_SPECIFIED, 'Not Specified'),
-    )
-
     profile_picture = models.ImageField(
         blank=True, null=True, upload_to='accounts/user/profile-picture')
     birth_date = models.DateField(blank=True, null=True)
