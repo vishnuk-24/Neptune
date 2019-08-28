@@ -1,3 +1,5 @@
+"""Model for account users."""
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -134,19 +136,23 @@ class Teacher(BaseModel):
     """Creating teacher model."""
 
     user = models.OneToOneField(
-        User, on_delete=models.CASCADE, related_name='teacher')
+        User, on_delete=models.CASCADE, related_name='teacher'
+    )
     course_type = models.CharField(
-        max_length=64, default=OTHER, choices=COURSE_TYPE_CHOICES)
+        max_length=64, default=OTHER, choices=COURSE_TYPE_CHOICES
+    )
     status = models.CharField(
-        default=COMPLETED, choices=STATUS_CHOICES, max_length=32)
+        max_length=32, default=COMPLETED, choices=STATUS_CHOICES
+    )
     start_date = models.DateField()
     end_date = models.DateField(blank=True, null=True)
     score_percentage = models.DecimalField(
-        blank=True, decimal_places=5, default=0, max_digits=8)
-    total_experience = models.IntegerField(
-        blank=True, null=True, db_index=True)
-    specification = models.ManyToManyField(
-        Specification, blank=True, max_length=200)
+        max_digits=8, blank=True, decimal_places=5, default=0
+    )
+    total_experience = models.PositiveIntegerField(
+        blank=True, null=True, db_index=True
+    )
+    specification = models.ManyToManyField(Specification, blank=True)
     remarks = models.TextField(blank=True, null=True)
 
     def __str__(self):
