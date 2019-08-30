@@ -56,7 +56,7 @@ ROOT_URLCONF = 'neptune.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -129,6 +129,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# my_project/settings.py
+LOGIN_REDIRECT_URL = '/accounts/home/'
+
+LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 # Import local settings if available
 

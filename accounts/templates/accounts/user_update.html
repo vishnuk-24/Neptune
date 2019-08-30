@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" class="btn btn_success" value="Update">
+    </form>
+    <script>
+        $(document).ready(() =>{
+            $("#id_password").attr('type', 'password');
+            });
+    </script>
+{% endblock %}
