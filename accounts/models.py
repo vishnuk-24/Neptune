@@ -91,7 +91,7 @@ class User(AbstractUser):
     """Create users using AbstractUser."""
 
     profile_picture = models.ImageField(
-        blank=True, null=True, upload_to='accounts/user/profile-picture')
+        blank=True, null=True, upload_to='accounts/accounts/profile-picture')
     birth_date = models.DateField(blank=True, null=True)
     age = models.IntegerField(blank=True, null=True)
     gender = models.CharField(

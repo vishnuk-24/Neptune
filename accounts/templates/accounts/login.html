@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+    <p><center><h5>Login</h5></center></p>
+
+    {% if form.errors %}
+    <p>Username and password didn't match</p>
+    {% endif %}
+    <form action="" enctype='multipart/form-data' method="post">{% csrf_token %}
+        <center> Username:<input type="text" name="username"/> </center> <br>
+        <center> Password:<input type="password" name="password"/></center><br>
+        <center><button type="submit">Login</button></center>
+    </form>
+
+    <center><a href="{% url 'accounts:password_reset' %}"> Forgot Password </a></center>
+{% endblock %}

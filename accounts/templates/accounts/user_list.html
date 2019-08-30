@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1 class="text-center">Users</h1>
+	<hr />
+    <table class="table table-bordered">
+		<tr>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Update</th>
+			<th>Status</th>
+			<th>Delete</th>
+		</tr>
+	{% for u in users %}
+		<tr>
+			<td> <a href="{% url 'accounts:user_detail' pk=u.pk %}"> {{ u.get_full_name }} </a> </td>
+
+			<td> {{ u.email }} </td>
+			<td> <a href="{% url 'accounts:user_update' pk=u.pk %}"> Update user </a>
+			</td>
+
+			{% if u.is_superuser %}
+				<td>Admin</td>
+			{% elif u.is_staff %}
+				<td>Staff</td>
+			{% else %}
+				<td>Student</td>
+			{% endif %}
+
+			<td> <a href="{% url 'accounts:delete_user' pk=u.id %}"> Delete </a> </td>
+		</tr>
+		{% endfor %}
+	</table>
+{% endblock %}
