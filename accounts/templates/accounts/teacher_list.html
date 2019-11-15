@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1 class="text-center">Student</h1>
+	<hr />
+    <table class="table table-bordered">
+		<tr>
+			<!-- <th>SI.no.</th> -->
+			<th>Teacher</th>
+			<th>Course</th>
+			<th>Starts from</th>
+			<th>Update</th>
+			<th>Delete</th>
+		</tr>
+	{% for u in teachers %}
+		<tr>
+			<!-- <td> {{ u.admission_number }} </td> -->
+			<td> <a href="{% url 'accounts:user_detail' pk=u.pk %}"> {{ u.user.get_full_name }} </a> </td>
+			<td> {{ u.course_type }} </td>
+			<td> {{ u.start_date }} </td>
+			<td> <a href="{% url 'accounts:user_update' pk=u.pk %}"> Update student details </a></td>
+			<td> <a href="{% url 'accounts:delete_user' pk=u.id %}"> Delete </a> </td>
+		</tr>
+		{% endfor %}
+	</table>
+{% endblock %}

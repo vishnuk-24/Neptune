@@ -105,7 +105,11 @@ class User(AbstractUser):
     zip_code = models.CharField(blank=True, default='', max_length=12)
 
     is_student = models.BooleanField(default=False)
-    is_teacher = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
+
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
 
     REQUIRED_FIELDS = ['first_name', 'last_name', 'email']
 
@@ -120,6 +124,9 @@ class Student(BaseModel):
         User, on_delete=models.CASCADE, related_name='student')
     standard = models.IntegerField(choices=SATANDARD_CHOICE)
     division = models.CharField(max_length=32, choices=DIVISION_CHOICE)
+    rollnumber = models.IntegerField(blank=True, null=True)
+    admission_number = models.IntegerField(blank=True, null=True)
+    register_number = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return self.user.username

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="container">
+	<br/>
+			<h4 class="card-title mt-3 text-center">Create Account</h4>
+			<hr>
+			<!-- Alerts -->
+	<div class="row">
+		<div class="col-md-8 offset-md-2">
+					{% include 'accounts/_alerts.html' %}
+						<p class='success'>Customer added successfully</p>
+						<p class='error'></p>
+			
+			<form method="POST" action="" enctype="multipart/form-data" id="register-form" name='contact-form'>
+				<table align="center" id="registerTable">
+					{% csrf_token %}
+					{{ form.as_p }}
+				</table>
+				<input type="hidden" id="csrf_token" value="{{ csrf_token }}" />
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary btn-block create-account"> Create User </button>
+				</div> <!-- form-group// -->
+			</form>
+		</div>
+	</div>
+
+
+</div>
+
+
+{% endblock %}
+{% block scripts %}
+{% load static %}
+<script>
+	$(document).ready(() =>{
+		   $("#id_password").attr('type', 'password');
+	 });
+</script>
+<link rel="stylesheet" href="{% static 'accounts/css/register.css' %}">
+
+<script type="text/javascript" src="{% static 'accounts/js/script.js' %}"></script>
+
+{% endblock scripts %}
