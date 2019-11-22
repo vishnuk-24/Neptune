@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}create Student{% endblock title %}
+{% block title %} Create Student {% endblock title %}
 {% block content %}
 <style>
 	[role="row"] {
@@ -9,23 +9,23 @@
 </style>
 <div class="container">
 	<br>
-	<h4 class="card-title mt-3 text-center">create Student</h4>
+	<h4 class="card-title mt-3 text-center">Create Student</h4>
 	<hr>
 	<!-- Alerts -->
 	{% include 'accounts/_alerts.html' %}
-	{% csrf_token %}
 	<form method="post" enctype="multipart/form-data">
+		{% csrf_token %}
 		{{ form.as_p }}
-		<button type="submit" class="btn btn-success">create Student</button>
+		<button type="submit" class="btn btn-success">Create Student</button>
 	</form>
 </div>
 {% endblock content %}
 {% block scripts %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'customers/css/dataTables.bootstrap4.min.css' %}">
-<link rel="stylesheet" href="{% static 'customers/css/buttons.bootstrap4.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/dataTables.bootstrap4.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/buttons.bootstrap4.min.css' %}">
 
-<script type="text/javascript" src="{% static 'customers/js/datatables/jquery.dataTables.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'customers/js/datatables/dataTables.bootstrap4.min.js' %}"></script>
-<script src="{% static 'customers/js/listing.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/datatables/jquery.dataTables.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/datatables/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'js/listing.js' %}"></script>
 {% endblock scripts %}

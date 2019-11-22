@@ -1,9 +1,11 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views import generic
 
 from accounts.models import Teacher, Student, User
+from accounts.forms import StudentForm, TeacherForm
 
 
 class UserCreationView(generic.CreateView):
@@ -13,8 +15,8 @@ class UserCreationView(generic.CreateView):
     model = User
     fields = (
         'first_name', 'last_name', 'email', 'username', 'password', 'profile_picture', 
-        'birth_date', 'age', 'gender', 'phone','address', 'city', 'state',
-        'country', 'zip_code', 'is_student', 'is_staff', 'is_superuser'
+        'birth_date', 'age', 'gender', 'phone', 'address', 'city', 'state',
+        'country', 'zip_code', 'joining_date', 'leaving_date', 'is_student', 'is_staff', 'is_superuser'
     )
     student_success_url = reverse_lazy('accounts:student')
     teacher_success_url = reverse_lazy('accounts:teacher')
@@ -39,15 +41,12 @@ class StudentCreationView(generic.CreateView):
 
     template_name = 'accounts/student.html'
     model = Student
-    fields = (
-        'user', 'standard', 'division', 'rollnumber', 'admission_number',
-        'register_number'
-    )
+    form_class = StudentForm
     success_url = reverse_lazy('accounts:student_list')
     
-
     def form_valid(self, form):
         Student.objects.create(**form.cleaned_data)
+        messages.success(self.request, 'Successfully Added student')
         return redirect(self.success_url)
         
 
@@ -56,14 +55,16 @@ class TeacherCreationView(generic.CreateView):
 
     template_name = 'accounts/teacher.html'
     model = Teacher
-    fields = (
-        'user', 'course_type', 'status', 'start_date', 'end_date',
-        'total_experience', 'specification', 'remarks'
-    )
+    form_class = TeacherForm
     success_url = reverse_lazy('accounts:teacher_list')
 
     def form_valid(self, form):
-        Teacher.objects.create(**form.cleaned_data)
+        poped_subject = form.cleaned_data.pop('subject')
+        print(poped_subject)
+        teacher = Teacher.objects.create(**form.cleaned_data)
+        for subject in poped_subject:
+            teacher.subject.add(subject)
+        messages.success(self.request, 'Successfully Added Teacher')
         return redirect(self.success_url)
 
 
@@ -84,7 +85,7 @@ class TeacherList(generic.ListView):
     """
     model = Teacher
     template_name = 'accounts/teacher_list.html'
-    context_object_name = 'teachers'
+    context_object_name = 'teachers_profile'
 
 
 class StudentDetail(generic.DetailView):
@@ -93,7 +94,7 @@ class StudentDetail(generic.DetailView):
 
     """
     model = Student
-    template_name = 'accounts/student_profile.html'
+    template_name = 'accounts/student_detail.html'
     context_object_name = 'student_profile'
 
 

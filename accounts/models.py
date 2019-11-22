@@ -104,6 +104,9 @@ class User(AbstractUser):
     country = models.CharField(blank=True, default='', max_length=128)
     zip_code = models.CharField(blank=True, default='', max_length=12)
 
+    joining_date = models.DateField(blank=True, null=True)
+    leaving_date = models.DateField(blank=True, null=True)
+
     is_student = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
@@ -145,21 +148,13 @@ class Teacher(BaseModel):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, related_name='teacher'
     )
-    course_type = models.CharField(
+    qualification = models.CharField(
         max_length=64, default=OTHER, choices=COURSE_TYPE_CHOICES
-    )
-    status = models.CharField(
-        max_length=32, default=COMPLETED, choices=STATUS_CHOICES
-    )
-    start_date = models.DateField()
-    end_date = models.DateField(blank=True, null=True)
-    score_percentage = models.DecimalField(
-        max_digits=8, blank=True, decimal_places=5, default=0
     )
     total_experience = models.PositiveIntegerField(
         blank=True, null=True, db_index=True
     )
-    specification = models.ManyToManyField(Specification, blank=True)
+    subject = models.ManyToManyField(Specification, blank=True)
     remarks = models.TextField(blank=True, null=True)
 
     def __str__(self):

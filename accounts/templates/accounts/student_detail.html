@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Student List{% endblock title %}
+{% block title %}Student Details{% endblock title %}
 {% block content %}
 <style>
 	[role="row"] {
@@ -13,29 +13,19 @@
 	<hr>
 	<!-- Alerts -->
 	{% include 'accounts/_alerts.html' %}
-	{% csrf_token %}
-	<table id="example" class="table table-striped table-bordered" style="width:100%">
-		<thead>
-			<tr>
-				<th>Admission Number</th>
-				<th>Student</th>
-				<th>Standard</th>
-				<th>Register Number</th>
-				<th>Update</th>
-				<th>Delete</th>
-			</tr>
-		</thead>
-		{% for u in students %}
-		<tr>
-			<td> {{ u.admission_number }} </td>
-			<td> <a href="{% url 'accounts:student_detail' pk=u.pk %}"> {{ u.user.get_full_name }} </a> </td>
-			<td> {{ u.standard }} </td>
-			<td> {{ u.register_number }} </td>
-			<td> <a href="#"> Update student details </a></td>
-			<td> <a href="#"> Delete </a> </td>
-		</tr>
-		{% endfor %}
-	</table>
+    {% csrf_token %}
+    <h2>{{ student_profile.user.get_full_name }}</h2>
+    <hr />
+    {{ student_profile.user.profile_picture }}
+    <h3>Username : {{ student_profile.user.username }}</h3>
+    <h3>Email : {{ student_profile.email}}</h3>
+    <h3>Class : {{ student_profile.standard}}</h3>
+    <h3>Division : {{ student_profile.division}}</h3>
+    <h3>Rollnumber : {{ student_profile.rollnumber}}</h3>
+    <h3>Admission_number : {{ student_profile.admission_number}}</h3>
+    <h3>Register_number : {{ student_profile.register_number}}</h3>
+    <h3>Address : {{ student_profile.user.address}}</h3>
+	
 </div>
 {% endblock content %}
 {% block scripts %}

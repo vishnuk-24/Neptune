@@ -177,19 +177,17 @@
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{% url 'accounts:registration' %}" aria-expanded="false"><i
-                                    class="mdi mdi-account-multiple"></i><span class="hide-menu">Register</span></a>
+                                    class="mdi mdi-account-multiple"></i><span class="hide-menu"> Register</span></a>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{% url 'accounts:student_list' %}" aria-expanded="false"><i
-                                    class="mdi mdi-all-inclusive"></i><span class="hide-menu">Student</span></a>
+                                href="{% url 'accounts:student_list' %}" aria-expanded="false"><i class='fas fa-users'></i><span class="hide-menu"> Student</span></a>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{% url 'accounts:teacher_list' %}" aria-expanded="false"><i
-                                    class="fa fa-inr"></i><span class="hide-menu">Teacher</span></a>
+                                href="{% url 'accounts:teacher_list' %}" aria-expanded="false"><i class='fas fa-user-graduate'></i><span class="hide-menu"> Teacher</span></a>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="/admin" aria-expanded="false"><i
-                                    class="fa fa-user-circle"></i><span class="hide-menu">Admin</span></a>
+                                    class="fa fa-user-circle"></i><span class="hide-menu"> Admin</span></a>
                         </li>
                     </ul>
                 </nav>
@@ -256,6 +254,8 @@
     <script src="{% static 'js/jquery.flot.crosshair.js' %}"></script>
     <script src="{% static 'js/jquery.flot.tooltip.min.js' %}"></script>
     <script src="{% static 'js/chart-page-init.js' %}"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
 
     {% block scripts %}{% endblock scripts %}
 </body>

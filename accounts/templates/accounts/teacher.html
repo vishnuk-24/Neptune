@@ -1,14 +1,36 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+
+{% block title %}Create Teacher{% endblock title %}
 {% block content %}
+<style>
+	[role="row"] {
+		text-transform: capitalize;
+	}
+</style>
+<div class="container">
+	<br>
+	<h4 class="card-title mt-3 text-center">Create Teacher</h4>
+	<hr>
+	<!-- Alerts -->
+	{% include 'accounts/_alerts.html' %}
 	<form method="post" enctype="multipart/form-data">
 		{% csrf_token %}
 		{{ form.as_p }}
-		<button type="submit" class="btn btn-success">create Teacher</button>
+		<button type="submit" class="btn btn-success">Create Teacher</button>
 	</form>
-
-	<script>
-	  $(document).ready(() =>{
-		   $("#id_password").attr('type', 'password');
-	 });
-	</script>
+</div>
 {% endblock content %}
+{% block scripts %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'customers/css/dataTables.bootstrap4.min.css' %}">
+<link rel="stylesheet" href="{% static 'customers/css/buttons.bootstrap4.min.css' %}">
+
+<script type="text/javascript" src="{% static 'customers/js/datatables/jquery.dataTables.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'customers/js/datatables/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'customers/js/listing.js' %}"></script>
+<script>
+	$(document).ready(() =>{
+		 $("#id_password").attr('type', 'password');
+   });
+  </script>
+{% endblock scripts %}

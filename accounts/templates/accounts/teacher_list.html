@@ -1,25 +1,48 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+
+{% block title %} Teacher List {% endblock title %}
 {% block content %}
-    <h1 class="text-center">Student</h1>
-	<hr />
-    <table class="table table-bordered">
+<style>
+	[role="row"] {
+		text-transform: capitalize;
+	}
+</style>
+<div class="container">
+	<br>
+	<h4 class="card-title mt-3 text-center">Teachers</h4>
+	<hr>
+	<!-- Alerts -->
+	{% include 'accounts/_alerts.html' %}
+	{% csrf_token %}
+	<table id="example" class="table table-striped table-bordered" style="width:100%">
+		<thead>
+			<tr>
+				<!-- <th>SI.no.</th> -->
+				<th>Teacher</th>
+				<th>Course</th>
+				<th>Starts from</th>
+				<th>Update</th>
+				<th>Delete</th>
+			</tr>
+		</thead>
+		{% for u in teachers %}
 		<tr>
-			<!-- <th>SI.no.</th> -->
-			<th>Teacher</th>
-			<th>Course</th>
-			<th>Starts from</th>
-			<th>Update</th>
-			<th>Delete</th>
-		</tr>
-	{% for u in teachers %}
-		<tr>
-			<!-- <td> {{ u.admission_number }} </td> -->
-			<td> <a href="{% url 'accounts:user_detail' pk=u.pk %}"> {{ u.user.get_full_name }} </a> </td>
-			<td> {{ u.course_type }} </td>
+			<td> <a href="#"> {{ u.user.get_full_name }} </a> </td>
+			<td> {{ u.subject.name }} </td>
 			<td> {{ u.start_date }} </td>
-			<td> <a href="{% url 'accounts:user_update' pk=u.pk %}"> Update student details </a></td>
-			<td> <a href="{% url 'accounts:delete_user' pk=u.id %}"> Delete </a> </td>
+			<td> <a href="#"> Update teacher details </a></td>
+			<td> <a href="#"> Delete </a> </td>
 		</tr>
 		{% endfor %}
 	</table>
-{% endblock %}
+</div>
+{% endblock content %}
+{% block scripts %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/dataTables.bootstrap4.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/buttons.bootstrap4.min.css' %}">
+
+<script type="text/javascript" src="{% static 'js/datatables/jquery.dataTables.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/datatables/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'js/listing.js' %}"></script>
+{% endblock scripts %}
