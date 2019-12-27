@@ -31,8 +31,8 @@
 			<td> <a href="{% url 'accounts:student_detail' pk=u.pk %}"> {{ u.user.get_full_name }} </a> </td>
 			<td> {{ u.standard }} </td>
 			<td> {{ u.register_number }} </td>
-			<td> <a href="#"> Update student details </a></td>
-			<td> <a href="#"> Delete </a> </td>
+			<td> <a href="{% url 'accounts:student_update' pk=u.pk %}"> Update student details </a></td>
+			<td> <a href="{% url 'accounts:student_delete' pk=u.pk %}"> Delete </a> </td>
 		</tr>
 		{% endfor %}
 	</table>

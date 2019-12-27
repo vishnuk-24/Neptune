@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 
-{% block title %}Student Details{% endblock title %}
+{% block title %}Teacher Details{% endblock title %}
 {% block content %}
+{% load static %}
 <style>
 	[role="row"] {
 		text-transform: capitalize;
@@ -9,22 +10,40 @@
 </style>
 <div class="container">
 	<br>
-	<h4 class="card-title mt-3 text-center">Student</h4>
+	<h4 class="card-title mt-3 text-center">Teacher</h4>
 	<hr>
 	<!-- Alerts -->
 	{% include 'accounts/_alerts.html' %}
     {% csrf_token %}
+    <div class="col-md-4">
+        <div class="profile-img">
+            {% if teacher_profile.user.profile_picture %}
+                <img src="/media/{{ teacher_profile.user.profile_picture }}" alt="" style="height:200px;width:220px;"/>
+            {% else %}
+                <img src="{% static 'accounts/img/avatar.png' %}" alt="" style="height:200px;width:200px;"/>
+            {% endif %}
+<!--                     <div class="file btn btn-lg btn-primary">
+                Change Photo
+                <input type="file" name="file"/>
+            </div> -->
+        </div>
+    </div>
+    <div></div>
+    <br>
+    
     <h2>{{ teacher_profile.user.get_full_name }}</h2>
     <hr />
-    {{ teacher_profile.user.profile_picture }}
+
     <h3>Username : {{ teacher_profile.user.username }}</h3>
-    <h3>Email : {{ teacher_profile.email}}</h3>
-    <h3>Class : {{ teacher_profile.standard}}</h3>
-    <h3>Division : {{ teacher_profile.division}}</h3>
-    <h3>Rollnumber : {{ teacher_profile.rollnumber}}</h3>
-    <h3>Admission_number : {{ teacher_profile.admission_number}}</h3>
-    <h3>Register_number : {{ teacher_profile.register_number}}</h3>
-    <h3>Address : {{ teacher_profile.user.address}}</h3>
+    <h3>Email : {{ teacher_profile.user.email }}</h3>
+    <h3>Address : {{ teacher_profile.user.address }}</h3>
+
+    <h3>Joining date : {{ teacher_profile.user.joining_date }}</h3>
+    <h3>Leaving data : {{ teacher_profile.user.leaving_date }}</h3>
+
+    <h3>Qualification : {{ teacher_profile.qualification }}</h3>
+    <h3>Total Experience : {{ teacher_profile.total_experience }}</h3>
+    <h3>Subject : {% for sub in teacher_profile.subject.all %} {{ sub }} {% endfor %}</h3>
 	
 </div>
 {% endblock content %}

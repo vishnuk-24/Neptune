@@ -27,11 +27,11 @@
 		</thead>
 		{% for u in teachers %}
 		<tr>
-			<td> <a href="#"> {{ u.user.get_full_name }} </a> </td>
-			<td> {{ u.subject.name }} </td>
-			<td> {{ u.start_date }} </td>
-			<td> <a href="#"> Update teacher details </a></td>
-			<td> <a href="#"> Delete </a> </td>
+			<td> <a href="{% url 'accounts:teacher_detail' pk=u.pk %}"> {{ u.user.get_full_name }} </a> </td>
+			<td> {% for sub in u.subject.all %} {{ sub }} {% endfor %} </td>
+			<td> {{ u.user.joining_date }} </td>
+			<td> <a href="{% url 'accounts:teacher_update' pk=u.pk %}"> Update teacher details </a></td>
+			<td> <a href="{% url 'accounts:teacher_delete' pk=u.pk %}"> Delete </a> </td>
 		</tr>
 		{% endfor %}
 	</table>
